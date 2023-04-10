@@ -1,7 +1,7 @@
 package main
 
 import (
-	"SimpleServer/internal/service/psqlService/server"
+	"SimpleServer/server"
 	"context"
 	"fmt"
 	"github.com/jackc/pgx/v5"
@@ -18,9 +18,9 @@ func main() {
 		os.Exit(1)
 	}
 	defer conn.Close(context.Background())
-	server := server.NewServer(conn)
+	psqlServer := server.NewServer(conn)
 
-	http.HandleFunc("/PSQL/JSON", server.PsqlHandler)
+	http.HandleFunc("/PSQL/JSON", psqlServer.PsqlHandler)
 
 	fmt.Println("Starting....")
 	if err := http.ListenAndServe(":8080", nil); err != nil {
