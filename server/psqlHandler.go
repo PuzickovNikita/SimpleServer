@@ -26,9 +26,7 @@ func (s *Server) PsqlHandler(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadRequest)
 		return
 	}
-	var req = tables.SimpleTable{
-		Key: -1,
-	}
+	var req = tables.SimpleTable{}
 	switch r.Method {
 	case "GET":
 		if err := decodeJson(w, r, &req); err != nil {
